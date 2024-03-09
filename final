@@ -1,0 +1,221 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Student
+{
+private:
+    string Fname;
+    string Lname;
+    string ID;
+    string Password;
+
+public:
+    Student(string fn, string ln, string id, string password)
+    {
+        Fname = fn;
+        Lname = ln;
+        ID = id;
+        Password = password;
+    }
+
+    Student()
+    {
+        Fname = " ";
+        Lname = " ";
+        ID = " ";
+        Password = " ";
+    }
+
+    void setFname(string fn)
+    {
+        Fname = fn;
+    }
+
+    void setLname(string ln)
+    {
+        Lname = ln;
+    }
+
+    void setID(string id)
+    {
+        ID = id;
+    }
+
+    void setPassword(string password)
+    {
+        Password = password;
+    }
+
+    string getFname()
+    {
+        return Fname;
+    }
+
+    string getLname()
+    {
+        return Lname;
+    }
+
+    string getID()
+    {
+        return ID;
+    }
+
+    string getPassword()
+    {
+        return Password;
+    }
+};
+
+class Book : public Student
+{
+private:
+    string Namebook;
+    int Numberbook;
+    float Costbook;
+public:
+
+
+    Book(string fn, string ln, string id, string password, string nb, int numb,float cb) : Student(fn, ln, id, password)
+    {
+        Namebook = nb;
+        Numberbook = numb;
+        Costbook = cb;
+    }
+
+    void setnamebook(string nb)
+    {
+        Namebook = nb;
+    }
+
+    void setnumberbook(int numb)
+    {
+        Numberbook = numb;
+    }
+    void setcostbook(float cb)
+    {
+        Costbook = cb;
+    }
+
+    string getnamebook()
+    {
+        return Namebook;
+    }
+
+    int getnumberbook()
+    {
+        return Numberbook;
+    }
+
+    float getcostbook()
+    {
+        return Costbook;
+    }
+
+};
+
+class Report_Login : public Book
+{
+private:
+    int NumberLogin;
+
+public:
+    Report_Login(string fn, string ln, string id, string password, string nb, int numb, int rl,float cb) : Book(fn, ln, id, password, nb, numb,cb)
+    {
+        NumberLogin = rl;
+    }
+
+    void setreportlogin(int rl)
+    {
+        NumberLogin = rl;
+    }
+
+    int getreportlogin()
+    {
+        return NumberLogin;
+    }
+
+    void operator++()
+    {
+        ++NumberLogin;
+    }
+
+
+};
+class Sale:public Report_Login
+{
+public:
+    Sale(string fn, string ln, string id, string password, string nb, int numb, int rl,float cb):Report_Login(fn, ln, id, password, nb, numb, rl,cb) {}
+};
+void Salelogin(int NumberLogin)
+{
+    if (NumberLogin >= 2)
+    {
+
+    }
+}
+
+class Display :public Report_Login
+{
+public:
+    Display(string fn, string ln, string id, string password, string nb, int numb, int rl,float cb):Report_Login(fn, ln, id, password, nb, numb, rl,cb) {}
+
+    void showInfo()
+    {
+        cout << "--------------------------------------------------------------------" << endl;
+        cout << "Welcome to the library" << endl;
+        cout << "your first name : " << getFname() << endl << "your last name : " << getLname() << endl;
+        cout << "your ID: " << getID() << endl;
+        cout << "your Password: " << getPassword() << endl;
+        cout << "Name Book: " << getnamebook() << endl;
+        cout << "Number Book: " << getnumberbook() << endl;
+        cout << "Number of Logins: " << getreportlogin() << endl;
+        cout << "Costbook : "<< getcostbook() <<endl;
+         cout << "Sale: "<< getcostbook()/2 <<endl;
+        cout << "--------------------------------------------------------------------" << endl;
+        cout<<endl;
+    }
+};
+
+int main()
+{
+    string firstName, lastName, studentID, password, namebook;
+    int numberbook,j=1,stop;
+    Student z;
+    jump:
+    do{
+    cout << "Enter your first name: ";
+    cin >> firstName;
+
+    cout << "Enter your last name: ";
+    cin >> lastName;
+
+    cout << "Enter your student ID: ";
+    cin >> studentID;
+
+    cout << "Enter your password: ";
+    cin >> password;
+
+    cout << "Enter Name Book: ";
+    cin >> namebook;
+    cout<<"Enter number Book: ";
+    cin>>numberbook;
+    cout << endl;
+    float costbook = 50 *numberbook;
+
+    Display a(firstName, lastName, studentID, password, namebook, numberbook, j,costbook);
+    a.showInfo();
+     if (z.getPassword() == password) {
+            stop = 10;
+            goto jump;
+        }
+    else if(z.getID()==studentID){stop = 10;}
+        else {
+            stop = 0;
+            goto jump;
+        }
+    }while(stop=0);
+
+    return 0;
+}
